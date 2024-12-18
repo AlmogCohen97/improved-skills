@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    environment {
+        ENV = 'production'
+    }
+
     stages {
         stage('Build') {
             steps {
@@ -19,6 +23,13 @@ pipeline {
                 echo 'Deploying...'
                 // Add your deploy steps here
             }
+        }
+    }
+
+    post {
+        always {
+            echo 'Sending notifications...'
+            // Add your notification steps here (e.g., email-ext or slack)
         }
     }
 }
